@@ -1,7 +1,7 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-#include <FastLED.h>
+#include "mappings.h"
 
 /*
   ==============================================================================
@@ -19,19 +19,25 @@
 #define DEBOUNCE_INTERVAL 20
 
 // Number of pads present in the dance mat.
-// This is usually 4 for DDR, or 5 for PIU.
+// This would be 4 for DDR, and 5 for PIU.
 #define NUMBER_OF_PADS 5
 
-// Arduino pins where each pad (essentially a momentary switch) is connected to.
+// Arduino pins where each pad is connected to. Pads will be treated as
+// momentary switches, and will be set in Arduino as INPUT_PULLUP.
+//
 // Add or remove lines according to the number of pads present.
-// Comments below indicate pad mappings for PIU.
-const int SENSOR_PINS[] = {
-  2, // Top Left
-  3, // Top Right
-  4, // Center
-  5, // Bottom Left
-  6  // Bottom Right
-};
+// Check "mappings.h" file for available mappings, or create your own by
+// uncommenting the code below.
+//
+//const int CUSTOM_SENSOR_PINS[] = {
+//  9,  // Pad 1
+//  10, // Pad 2
+//  11, // Pad 3
+//  12  // Pad 4
+//};
+//#define SENSOR_PINS CUSTOM_SENSOR_PINS
+//
+#define SENSOR_PINS PIU_SENSOR_PINS
 
 /*
   ==============================================================================
@@ -52,6 +58,12 @@ const int SENSOR_PINS[] = {
   recognized as a single FastLED strip.
 */
 
+// Whether the dance mat has LEDs that light up when the player steps on them.
+// This only works if all pads have LEDs, and also same number of them per pad.
+#define PADS_HAVE_LEDS
+
+#ifdef PADS_HAVE_LEDS
+
 // The LED chipset.
 // Refer to https://github.com/FastLED/FastLED#supported-led-chipsets
 // for a list of supported chipsets.
@@ -59,10 +71,6 @@ const int SENSOR_PINS[] = {
 
 // The order of the RGB pins on the chipset. Reorder as necessary.
 #define LED_RGB_ORDER RGB
-
-// Whether the dance mat has LEDs that light up when the player steps on them.
-// This only works if all pads have LEDs, and also same number of them per pad.
-#define PADS_HAVE_LEDS
 
 // Arduino Pin where the Data pin of the LED is connected to.
 // This pin should be connected to the Din input on the first LED of the first
@@ -89,25 +97,18 @@ const int SENSOR_PINS[] = {
 // and indicator that the pad is now online and ready for use.
 #define INIT_INSPECT_DELAY 1000
 
-// Custom colours to match pad art.
-// The three colours were chosen in such a way so each LED will draw roughly the
-// same amount of current. If each color value was divided by 64, these would be
-// the rough "load amount" for each colour:
+// Map colours to pads. Check "mappings.h" file for available mappings, or
+// create your own by uncommenting the code below.
 //
-// Red:    1 + 4 + 1 = 6 "units of load"
-// Blue:   1 + 1 + 4 = 6
-// Yellow: 3 + 3 + 0 = 6
-#define RED    CRGB(64, 255, 64)
-#define BLUE   CRGB(64, 64, 255)
-#define YELLOW CRGB(192, 192, 0)
+//const CRGB CUSTOM_PAD_COLORS[] = {
+//  CRGB::White, // Pad 1
+//  CRGB::White, // Pad 2
+//  CRGB::White, // Pad 3
+//  CRGB::White  // Pad 4
+//};
+//#define PAD_COLORS CUSTOM_PAD_COLORS;
+//
+#define PAD_COLORS PIU_PAD_COLORS
 
-// Map colours to pads. Comments indicate a mapping for a PIU pad.
-const CRGB PAD_COLORS[] = {
-  RED,    // Top left
-  RED,    // Top right
-  YELLOW, // Center
-  BLUE,   // Bottom left
-  BLUE    // Bottom right
-};
-
+#endif
 #endif

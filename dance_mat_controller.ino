@@ -22,10 +22,12 @@ void loop() {
   checkPads();
 
 #ifdef PADS_HAVE_LED
+  // If the LED controller is enabled, set then according to the pads state.
   for (int padIndex = 0; padIndex < NUMBER_OF_PADS; padIndex++) {
-    padLeds[padIndex]->setState(leds, pad->isPressed());
+    padLeds[padIndex]->setState(leds, pads[padIndex]->isPressed());
   }
 
+  // Write to strip, updating the LEDs.
   FastLED.show();
 #endif
 

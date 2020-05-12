@@ -13,7 +13,7 @@ Pad *pads[NUMBER_OF_PADS];
 
 void setupPads() {
   Joystick.begin();
-  
+
   for (int padIndex = 0; padIndex < NUMBER_OF_PADS; padIndex++) {
     pads[padIndex] = new Pad(SENSOR_PINS[padIndex], DEBOUNCE_INTERVAL);
   }
