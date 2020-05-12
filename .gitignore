@@ -1,0 +1,8 @@
+.vscode
+.vs
+.idea
+.DS_Store
+
+*.log
+*.meta
+*.obj
