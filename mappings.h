@@ -42,8 +42,8 @@ const int DDR_SENSOR_PINS[] = {
 
 // Custom colours to match pad art.
 // The three colours were chosen in such a way so each LED will draw roughly the
-// same amount of current. If each color value was divided by 64, these would be
-// the rough "load amount" for each colour:
+// same amount of current. If each colour value was divided by 64, these would
+// be the rough "load amount" for each colour:
 //
 // Red:    1 + 4 + 1 = 6 "units of load"
 // Blue:   1 + 1 + 4 = 6

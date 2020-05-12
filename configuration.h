@@ -85,16 +85,16 @@
 // very limited number of LEDs, as typical current limit on USB 2 is 500mA, or
 // 900mA for USB 3.
 //
-// For instance, for a PIU pad using WS2812 LEDs and the colors suggested below,
-// each LED will draw roughly 20mA, so using for instance, 8 leds per pad will
-// result in a max current draw of 800mA, when all 5 pads are pressed at the
-// same time (20mA * 8 leds * 5 pads). If more LEDs are required, an external
-// power source is needed.
+// For instance, for a PIU pad using WS2812 LEDs and the colours suggested
+// below, each LED will draw roughly 20mA, so using for instance, 8 leds per pad
+// will result in a max current draw of 800mA, when all 5 pads are pressed at
+// the same time (20mA * 8 leds * 5 pads). If more LEDs are required, an
+// external power source is needed.
 #define LEDS_PER_PAD 8
 
-// Duration in milliseconds for which the LEDs remain turned on when the pad is
+// Duration in milliseconds for which the LEDs flash on when the pad is
 // initialized. This can be used to make sure the LEDs are working, and also as
-// and indicator that the pad is now online and ready for use.
+// an indicator that the pad is now online and ready for use.
 #define INIT_INSPECT_DELAY 1000
 
 // Map colours to pads. Check "mappings.h" file for available mappings, or
