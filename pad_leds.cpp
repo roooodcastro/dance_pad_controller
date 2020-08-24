@@ -1,20 +1,21 @@
+#include "configuration.h"
 #include "pad_leds.h"
 
+#ifdef ARROWS_HAVE_LEDS
 PadLeds::PadLeds(int padIndex, int ledsPerPad, CRGB color) {
   _color      = color;
   _padIndex   = padIndex;
   _ledsPerPad = ledsPerPad;
 }
 
-void PadLeds::setState(CRGB *leds, bool onOff) {
-  if (_padIndex != 2) {
-    return; // Temporary while the pad is not ready
-  }
+CRGB *PadLeds::getLeds() {
+  return _leds;
+}
 
+void PadLeds::setState(bool onOff) {
   CRGB newColor = onOff ? _color : CRGB::Black;
-  int ledOffset = _padIndex * _ledsPerPad;
   for (int i = 0; i < _ledsPerPad; i++) {
-    //leds[ledOffset + i] = newColor;
-    leds[i] = newColor;
+    _leds[i] = newColor;
   }
 }
+#endif

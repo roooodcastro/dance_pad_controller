@@ -1,61 +1,48 @@
+
 #ifndef MAPPINGS_H
 #define MAPPINGS_H
 
+#include "configuration.h"
+
+struct CRGB;
+
+#ifdef ARROWS_HAVE_LEDS
 #include <FastLED.h>
+#endif
 
-// Pump it Up pad layout:
-//
-// ╔═══════════════╗
-// ║┌───┐     ┌───┐║
-// ║│ 2 │     │ 3 │║
-// ║└───┘┌───┐└───┘║
-// ║     │ 4 │     ║
-// ║┌───┐└───┘┌───┐║
-// ║│ 5 │     │ 6 │║
-// ║└───┘     └───┘║
-// ╚═══════════════╝
-const int PIU_SENSOR_PINS[] = {
-  2, // Top Left
-  3, // Top Right
-  4, // Center
-  5, // Bottom Left
-  6  // Bottom Right
-};
+/*
+  ==============================================================================
+  LED-related mappings (ignore if your pad does not have LEDs)
+  ==============================================================================
+*/
 
-// Dance Dance Revolution pad layout:
-//
-// ╔═══════════════╗
-// ║     ┌───┐     ║
-// ║     │ 2 │     ║
-// ║┌───┐└───┘┌───┐║
-// ║│ 3 │     │ 4 │║
-// ║└───┘┌───┐└───┘║
-// ║     │ 5 │     ║
-// ║     └───┘     ║
-// ╚═══════════════╝
-const int DDR_SENSOR_PINS[] = {
-  2, // Top
-  3, // Left
-  4, // Right
-  5  // Bottom
-};
-
-// Custom colours to match pad art.
+// Custom colours to match arrow art.
 // The three colours were chosen in such a way so each LED will draw roughly the
 // same amount of current. If each colour value was divided by 64, these would
 // be the rough "load amount" for each colour:
 //
-// Red:    1 + 4 + 1 = 6 "units of load"
-// Blue:   1 + 1 + 4 = 6
-// Yellow: 3 + 3 + 0 = 6
-#define RED    CRGB(64, 255, 64)
-#define BLUE   CRGB(64, 64, 255)
-#define YELLOW CRGB(192, 192, 0)
-#define PINK   CRGB(0, 255, 128)
-#define CYAN   CRGB(128, 0, 255)
+// Red:    4 + 2 + 2 = 8 "units of load", out of a possible 12 (66% power)
+// Blue:   2 + 2 + 4 = 8
+// Yellow: 4 + 4 + 0 = 8
+#define RED    CRGB(255, 128, 128)
+#define BLUE   CRGB(128, 128, 255)
+#define YELLOW CRGB(255, 255, 0)
+#define PINK   CRGB(255, 0, 128)
+#define CYAN   CRGB(0, 128, 255)
 
-// Mappings for the PIU pads
-const CRGB PIU_PAD_COLORS[] = {
+// Mappings for PIU LED pins
+constexpr int PIU_LED_PINS[] = {
+  3, // Top Left
+  5, // Top Right
+  7, // Center
+  9, // Bottom Left
+  11 // Bottom Right
+};
+
+#ifdef ARROWS_HAVE_LEDS
+
+// Mappings for a PIU pad
+const CRGB PIU_ARROW_COLORS[] = {
   RED,    // Top left
   RED,    // Top right
   YELLOW, // Center
@@ -63,12 +50,20 @@ const CRGB PIU_PAD_COLORS[] = {
   BLUE    // Bottom right
 };
 
-// Mappings for the DDR pads
-const CRGB DDR_PAD_COLORS[] = {
+// Mappings for DDR LED pins
+const int DDR_LED_PINS[] = {
+  3, // Top
+  5, // Left
+  7, // Right
+  9  // Bottom
+};
+
+// Mappings for a DDR pad
+const CRGB DDR_ARROW_COLORS[] = {
   PINK, // Top
   CYAN, // Left
   CYAN, // Right
   PINK  // Bottom
 };
-
+#endif
 #endif

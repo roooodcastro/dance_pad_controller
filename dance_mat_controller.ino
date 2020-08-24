@@ -1,16 +1,15 @@
-#include <Arduino.h>
-
 #include "configuration.h"
-#include "pads_controller.h"
 
-#ifdef PADS_HAVE_LED
+#include <Arduino.h>
+#include "pads_controller.h"
 #include "leds_controller.h"
-#endif
 
 void setup() {
+  delay(500);
+
   setupPads();
 
-#ifdef PADS_HAVE_LED
+#ifdef ARROWS_HAVE_LEDS
   setupLeds();
   delay(INIT_INSPECT_DELAY);
 #endif
@@ -21,15 +20,13 @@ void setup() {
 void loop() {
   checkPads();
 
-#ifdef PADS_HAVE_LED
+#ifdef ARROWS_HAVE_LEDS
   // If the LED controller is enabled, set then according to the pads state.
-  for (int padIndex = 0; padIndex < NUMBER_OF_PADS; padIndex++) {
-    padLeds[padIndex]->setState(leds, pads[padIndex]->isPressed());
+  for (int padIndex = 0; padIndex < NUMBER_OF_ARROWS; padIndex++) {
+    padLeds[padIndex]->setState(pads[padIndex]->isPressed());
   }
 
   // Write to strip, updating the LEDs.
   FastLED.show();
 #endif
-
-  delay(1);
 }

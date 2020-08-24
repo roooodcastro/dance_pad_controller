@@ -48,7 +48,7 @@ bouncing, which happens when the electrical contact is briefly lost on the pad
 due to physical bouncing. If absent, a single pad step would usually result in
 extra step inputs being sent to the controller, causing gameplay issues.
 *Defaults to `20`*
-* **NUMBER_OF_PADS**: Number of pads present in the dance mat.
+* **NUMBER_OF_ARROWS**: Number of pads present in the dance mat.
 This would be 4 for DDR, and 5 for PIU. *Defaults to `5`*
 * **SENSOR_PINS**: Arduino pins where each pad is connected to. Sensors will be
 treated as momentary switches, and will be set in Arduino as `INPUT_PULLUP`.
@@ -57,7 +57,7 @@ The file `mappings.h` defines mappings for PIU and DDR.
 
 ### LEDs configuration
 
-* **PADS_HAVE_LEDS**: Flag that sets whether the dance mat has LEDs that light
+* **ARROWS_HAVE_LEDS**: Flag that sets whether the dance mat has LEDs that light
 up when the player steps on them. Comment to disable. *Defaults to `enabled`*
 
 * **LED_CHIPSET**: The LED chipset.
@@ -67,12 +67,11 @@ for a list of supported chipsets. *Defaults to `WS2812B`*
 * **LED_RGB_ORDER**: The RGB order of the LED chipset.
 *Defaults to `RGB`*
 
-* **LED_PIN**: Arduino Pin where the Data pin of the LED is connected to.
-This pin should be connected to the Din input on the first LED of the first pad.
-From there, the D0 (output) wire should connect to the Din wire on the first LED
-of the second pad, and so on. *Defaults to `8`*
+* **LED_PINS**: Arduino pins where the Data pin of each pad's LEDs are
+connected to. Each pad has its own respective LED data input pin.
+*Defaults to `PIU_LED_PINS`*
 
-* **LEDS_PER_PAD**: How many LEDs are there per pad. The total current draw of
+* **LEDS_PER_ARROW**: How many LEDs are there per pad. The total current draw of
 the mat should be taken into account when choosing the numbe of LEDs.
 *Defaults to `8`*
 
@@ -81,8 +80,8 @@ when the pad is initialized. This can be used to make sure the LEDs are working,
 and also as an indicator that the pad is now online and ready for use.
 *Defaults to `1000`*
 
-* **PAD_COLORS**: Map LED colours to pads. The file `mappings.h` defines
-mappings for PIU and DDR. *Defaults to `PIU_PAD_COLORS`*
+* **ARROW_COLORS**: Map LED colours to pads. The file `mappings.h` defines
+mappings for PIU and DDR. *Defaults to `PIU_ARROW_COLORS`*
 
 ## License
 
