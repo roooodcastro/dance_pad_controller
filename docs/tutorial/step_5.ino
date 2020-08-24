@@ -70,7 +70,7 @@ void setup() {
   FastLED.addLeds<WS2812B, LED_PINS[3], GRB>(leds[3], LEDS_PER_ARROW);
   FastLED.addLeds<WS2812B, LED_PINS[4], GRB>(leds[4], LEDS_PER_ARROW);
 
-  // Iterate over all buttons to set them up
+  // Iterate over all arrows to set them up
   for (int i = 0; i < NUMBER_OF_ARROWS; i++) {
     pinMode(arrowPins[i], INPUT_PULLUP);
     pinMode(LED_PINS[i], OUTPUT);
@@ -81,13 +81,13 @@ void setup() {
 }
 
 void loop() {
-  // Iterate over all buttons to read them
+  // Iterate over all arrows to read them
   for (int i = 0; i < NUMBER_OF_ARROWS; i++) {
-    readButton(i);
+    readArrow(i);
   }
 }
 
-void readButton(int index) {
+void readArrow(int index) {
   bool newState = digitalRead(arrowPins[index]) == LOW;
   unsigned long timeSinceLastDebounce = abs(millis() - lastChanges[index]);
 
